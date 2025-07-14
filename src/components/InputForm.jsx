@@ -1,4 +1,3 @@
-// src/components/InputForm.jsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -25,8 +24,20 @@ export default function InputForm({ onAdd }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onAdd({ ...form, id: Date.now(), amount: Number(form.amount) });
-    setForm({ amount: '', date: '', type: 'income', category: '' });
+
+    onAdd({ 
+      ...form, 
+      id: Date.now(), 
+      amount: Number(form.amount) 
+    });
+
+    // clear only specific fields, keep date
+    setForm(prev => ({
+      ...prev,
+      amount: '',
+      category: '',
+      type: 'income' // optionally reset type too
+    }));
   };
 
   return (
